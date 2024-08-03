@@ -1,0 +1,7 @@
+services:
+  testing:
+    build:
+      context: ./demo03
+      dockerfile: Dockerfile
+    volumes:
+      - ./reports:/opt/app/junit/
