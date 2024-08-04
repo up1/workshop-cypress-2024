@@ -23,3 +23,9 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add("addProductToCart", (name, price) => {
+  cy.get(`[data-cy="${name}"]`).click();
+  cy.get(":nth-child(2) > a").should("have.text", "cart (1)");
+  cy.get('[data-test="checkout"]').should("have.text", "Total: $" + price);
+});

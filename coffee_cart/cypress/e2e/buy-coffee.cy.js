@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 const verifyFirstPage = () => {
   cy.get('[data-test="coffee-list"] > li').should('have.length', 9)
     cy.get(':nth-child(2) > a').should('have.text', 'cart (0)')
@@ -14,12 +16,11 @@ const addProductToCart = (name, price) => {
     .should('have.text', 'Total: $'+ price)
 }
 
-
 describe('Buy coffee', () => {
 
   it('Mouse over element', () => {
     cy.visit('https://coffee-cart-steel.vercel.app')
-    cy.get('[data-cy="Cappuccino"]').click()
+    cy.get('[data-cy="Cappuccino"]', { timeout: 5000 }).click()
     cy.get('[data-test="checkout"]').trigger('mouseover')
   })
 
@@ -28,7 +29,7 @@ describe('Buy coffee', () => {
     verifyFirstPage()
     
     // Add Cappuccino to cart
-    addProductToCart('Cappuccino', '19.00')
+    cy.addProductToCart('Cappuccino', '19.00')
     
     // Pay for the coffee
     cy.get('[data-test="checkout"]').click()
