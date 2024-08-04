@@ -1,8 +1,15 @@
 describe('Buy coffee', () => {
-  it('Buy one Cappuccino', () => {
+
+  it('Mouse over element', () => {
+    cy.visit('https://coffee-cart-steel.vercel.app')
+    cy.get('[data-cy="Cappuccino"]').click()
+    cy.get('[data-test="checkout"]').trigger('mouseover')
+  })
+
+  it.only('Buy one Cappuccino', () => {
     cy.visit('https://coffee-cart-steel.vercel.app')
     // Verify status of first page
-    cy.get(':nth-child(3) > ul > li').should('have.length', 9)
+    cy.get('[data-test="coffee-list"] > li').should('have.length', 9)
     cy.get(':nth-child(2) > a').should('have.text', 'cart (0)')
     cy.get(':nth-child(2) > a').should('have.attr', 'href', '/cart')
     cy.get('[data-test="checkout"]')
