@@ -62,6 +62,7 @@ describe("Buy coffee", () => {
     cy.visit("https://coffee-cart-steel.vercel.app");
     cy.get('[data-cy="Cappuccino"]', { timeout: 5000 }).click();
     cy.get('[data-test="checkout"]').trigger("mouseover");
+    cy.get(".modal-content").should("be.visible");
   });
 
   it("Buy one Cappuccino", () => {
