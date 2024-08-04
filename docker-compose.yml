@@ -1,7 +1,7 @@
 services:
   testing:
     build:
-      context: ./demo03
+      context: ./coffee_cart
       dockerfile: Dockerfile
     volumes:
       - ./reports:/opt/app/junit/
