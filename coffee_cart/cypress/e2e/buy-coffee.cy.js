@@ -24,7 +24,7 @@ describe('Buy coffee', () => {
     cy.get('#name').type('Somkiat')
     cy.get('#email').type('somkiat@xxx.com')
 
-    // Pay
+    // Pay with success
     cy.get('#submit-payment').click()
     cy.get('.snackbar').should('have.text', 'Thanks for your purchase. Please check your email for payment.')
     cy.get(':nth-child(2) > a').should('have.text', 'cart (0)')
