@@ -18,13 +18,21 @@ const addProductToCart = (name, price) => {
 
 describe('Buy coffee', () => {
 
+  it.only('Get text from element', () => {
+    cy.visit('https://coffee-cart-steel.vercel.app')
+    cy.get('[data-cy="Cappuccino"]').click()
+    cy.get('[data-cy="Cappuccino"] > div:nth-child(2)').invoke('text').then((text) => {
+      console.log(text)
+    });
+  })
+
   it('Mouse over element', () => {
     cy.visit('https://coffee-cart-steel.vercel.app')
     cy.get('[data-cy="Cappuccino"]', { timeout: 5000 }).click()
     cy.get('[data-test="checkout"]').trigger('mouseover')
   })
 
-  it.only('Buy one Cappuccino', () => {
+  it('Buy one Cappuccino', () => {
     cy.visit('https://coffee-cart-steel.vercel.app')
     verifyFirstPage()
     
