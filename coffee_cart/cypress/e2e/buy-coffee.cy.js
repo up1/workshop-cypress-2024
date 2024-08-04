@@ -31,7 +31,10 @@ describe("Buy coffee", () => {
         method: "GET",
         url: "/list.json",
       },
-      { fixture: "products.json" }
+      { 
+        delay: 3000,
+        fixture: "products.json" 
+      }
     ).as("List of products");
   });
 
