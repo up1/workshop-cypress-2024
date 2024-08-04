@@ -1,3 +1,20 @@
+const verifyFirstPage = () => {
+  cy.get('[data-test="coffee-list"] > li').should('have.length', 9)
+    cy.get(':nth-child(2) > a').should('have.text', 'cart (0)')
+    cy.get(':nth-child(2) > a').should('have.attr', 'href', '/cart')
+    cy.get('[data-test="checkout"]')
+      .should('be.visible')
+      .should('have.text', 'Total: $0.00')
+}
+
+const addProductToCart = (name, price) => {
+  cy.get(`[data-cy="${name}"]`).click()
+  cy.get(':nth-child(2) > a').should('have.text', 'cart (1)')
+  cy.get('[data-test="checkout"]')
+    .should('have.text', 'Total: $'+ price)
+}
+
+
 describe('Buy coffee', () => {
 
   it('Mouse over element', () => {
@@ -8,19 +25,10 @@ describe('Buy coffee', () => {
 
   it.only('Buy one Cappuccino', () => {
     cy.visit('https://coffee-cart-steel.vercel.app')
-    // Verify status of first page
-    cy.get('[data-test="coffee-list"] > li').should('have.length', 9)
-    cy.get(':nth-child(2) > a').should('have.text', 'cart (0)')
-    cy.get(':nth-child(2) > a').should('have.attr', 'href', '/cart')
-    cy.get('[data-test="checkout"]')
-      .should('be.visible')
-      .should('have.text', 'Total: $0.00')
+    verifyFirstPage()
     
     // Add Cappuccino to cart
-    cy.get('[data-cy="Cappuccino"]').click()
-    cy.get(':nth-child(2) > a').should('have.text', 'cart (1)')
-    cy.get('[data-test="checkout"]')
-      .should('have.text', 'Total: $19.00')
+    addProductToCart('Cappuccino', '19.00')
     
     // Pay for the coffee
     cy.get('[data-test="checkout"]').click()
