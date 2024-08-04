@@ -29,3 +29,8 @@ Cypress.Commands.add("addProductToCart", (name, price) => {
   cy.get(":nth-child(2) > a").should("have.text", "cart (1)");
   cy.get('[data-test="checkout"]').should("have.text", "Total: $" + price);
 });
+
+// Selector by data-cy
+Cypress.Commands.add("getByDataCy", (selector) => {
+  return cy.get(`[data-cy="${selector}"]`);
+});

@@ -20,7 +20,8 @@ describe('Buy coffee', () => {
 
   it.only('Get text from element', () => {
     cy.visit('https://coffee-cart-steel.vercel.app')
-    cy.get('[data-cy="Cappuccino"]').click()
+    // cy.get('[data-cy="Cappuccino"]').click()
+    cy.getByDataCy('Cappuccino').click()
     cy.get('[data-cy="Cappuccino"] > div:nth-child(2)').invoke('text').then((text) => {
       console.log(text)
     });
