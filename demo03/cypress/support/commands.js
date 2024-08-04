@@ -25,7 +25,9 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 Cypress.Commands.add("Checkout_with_username_and_email", (total_price) => {
-  cy.get('[data-test="checkout"]').should("have.text", `Total: $${total_price}`).click();
+  cy.get('[data-test="checkout"]')
+    .should("have.text", `Total: $${total_price}`)
+    .click();
   cy.get("h1").should("have.text", "Payment details");
   cy.get("#name").type("John Doe");
   cy.get("#email").type("xxx@xxx.com");
@@ -36,4 +38,8 @@ Cypress.Commands.add("Checkout_with_username_and_email", (total_price) => {
   );
   cy.get(":nth-child(2) > a").should("have.text", "cart (0)");
   cy.get('[data-test="checkout"]').should("have.text", "Total: $0.00");
+});
+
+Cypress.Commands.add("getBySelector", (selector, ...args) => {
+  return cy.get(`[data-cy=${selector}]`, ...args);
 });
