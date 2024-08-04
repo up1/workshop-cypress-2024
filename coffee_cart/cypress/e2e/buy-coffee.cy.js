@@ -42,11 +42,11 @@ describe('Buy coffee', () => {
     cy.step('Open a page')
     cy.visit('https://coffee-cart-steel.vercel.app')
     verifyFirstPage()
-    
+
     // Add Cappuccino to cart
     cy.step('Add product to cart')
     cy.addProductToCart('Cappuccino', '19.00')
-    
+
     // Pay for the coffee
     cy.step('Pay for the coffee')
     cy.get('[data-test="checkout"]').click()
@@ -65,6 +65,5 @@ describe('Buy coffee', () => {
     cy.get(':nth-child(2) > a').should('have.text', 'cart (0)')
     cy.get('[data-test="checkout"]')
       .should('have.text', 'Total: $0.00')
-
   })
 })
