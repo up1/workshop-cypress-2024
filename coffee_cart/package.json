@@ -11,5 +11,8 @@
   "description": "",
   "dependencies": {
     "cypress": "^13.13.2"
+  },
+  "devDependencies": {
+    "cypress-plugin-steps": "^1.1.1"
   }
 }

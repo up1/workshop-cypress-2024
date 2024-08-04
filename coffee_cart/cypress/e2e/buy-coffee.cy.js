@@ -18,10 +18,15 @@ const addProductToCart = (name, price) => {
 
 describe('Buy coffee', () => {
 
-  it.only('Get text from element', () => {
+  it('Get text from element', () => {
+    // cy.step('open a page')
     cy.visit('https://coffee-cart-steel.vercel.app')
     // cy.get('[data-cy="Cappuccino"]').click()
+
+    // cy.step('Add product to cart')
     cy.getByDataCy('Cappuccino').click()
+
+    // cy.step('Get data from product')
     cy.get('[data-cy="Cappuccino"] > div:nth-child(2)').invoke('text').then((text) => {
       console.log(text)
     });
@@ -33,23 +38,28 @@ describe('Buy coffee', () => {
     cy.get('[data-test="checkout"]').trigger('mouseover')
   })
 
-  it('Buy one Cappuccino', () => {
+  it.only('Buy one Cappuccino', () => {
+    cy.step('Open a page')
     cy.visit('https://coffee-cart-steel.vercel.app')
     verifyFirstPage()
     
     // Add Cappuccino to cart
+    cy.step('Add product to cart')
     cy.addProductToCart('Cappuccino', '19.00')
     
     // Pay for the coffee
+    cy.step('Pay for the coffee')
     cy.get('[data-test="checkout"]').click()
     cy.get('.modal-content').should('be.visible')
     cy.get('h1').should('have.text', 'Payment details')
 
     // Fill in payment details
+    cy.step('Fill in payment details')
     cy.get('#name').type('Somkiat')
     cy.get('#email').type('somkiat@xxx.com')
 
     // Pay with success
+    cy.step('Pay with success')
     cy.get('#submit-payment').click()
     cy.get('.snackbar').should('have.text', 'Thanks for your purchase. Please check your email for payment.')
     cy.get(':nth-child(2) > a').should('have.text', 'cart (0)')
